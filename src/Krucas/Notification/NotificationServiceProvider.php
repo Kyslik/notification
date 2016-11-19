@@ -2,8 +2,8 @@
 
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 use Krucas\Notification\Middleware\NotificationMiddleware;
-use Blade;
 
 class NotificationServiceProvider extends ServiceProvider
 {
@@ -22,9 +22,9 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $dispatcher)
     {
-        $this->publishes(array(
+        $this->publishes([
             __DIR__ . '/../../config/notification.php' => config_path('notification.php'),
-        ), 'config');
+        ], 'config');
 
         $dispatcher->subscribe('Krucas\Notification\Subscriber');
 
@@ -88,10 +88,10 @@ class NotificationServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return array(
+        return [
             'Krucas\Notification\Notification',
             'Krucas\Notification\Subscriber',
             'notification',
-        );
+        ];
     }
 }
